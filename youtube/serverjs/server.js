@@ -1,41 +1,39 @@
-const http = require('http')
+const express = require('express')
 const favicon = require('serve-favicon')
-const finalhandler = require('finalhandler')
 const path = require('path')
 
 let requestCount = 0
 
-let _favicon = favicon(path.join(__dirname, 'favicon.ico'))
+const app = express()
 
-const server = http.createServer((request, response) => {
-    let done = finalhandler(request, response)
+app.use(favicon(path.join(__dirname, 'favicon.ico')))
+
+app.get('favicon.ico', (request, response) => {
+    response.send('Hello')
+})
+
+app.get('/', (request, response) => {
+
+    let title
+
     if (request.url != '/favicon.ico') {
         requestCount++
     }
 
     switch (request.url) {
         case '/students':
-            response.write('Students')
+            title = 'Students'
             break
         case '/':
         case '/courses':
-            response.write('FRONT + BACKEND')
+            title = 'FRONT + BACKEND'
             break
         default:
-            response.write('Not found 404')
+            title = 'Not found 404'
     }
-    response.write(' - Count: ' + (requestCount))
-    _favicon(request, response, function onNext (err) {
-        if (err) return done(err)
 
-        // continue to process the request here, etc.
-
-        response.statusCode = 404
-        response.end('oops')
-    })
-    response.end()
-
+    response.send(title + ' - Count = ' + requestCount)
 
 })
 
-server.listen(3003)
+app.listen(3003)
