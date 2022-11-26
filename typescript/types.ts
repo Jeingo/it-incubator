@@ -39,3 +39,10 @@ function throwError(message: string): never {
 type Login = string
 
 const login1: Login = 'admin'
+
+
+//===
+
+type SomeType = string | null | undefined
+
+
