@@ -1,0 +1,1 @@
+SELECT flower1, flower2, CASE WHEN (folwer + flower2)%2 = 0 THEN false ELSE true END AS res FROM love
