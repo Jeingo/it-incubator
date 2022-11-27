@@ -1,0 +1,1 @@
+SELECT bool, CASE WHEN bool THEN 'Yes' ELSE 'NO' END AS res FROM booltoword
