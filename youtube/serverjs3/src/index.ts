@@ -1,5 +1,5 @@
 import express from 'express'
-const app = express()
+export const app = express()
 const port = 3000
 
 const jsonBody = express.json()
@@ -11,7 +11,7 @@ const db = {
         {id: 2, title: 'back-end'},
         {id: 3, title: 'test'},
         {id: 4, title: 'fullstack'}
-    ]
+   ]
 }
 
 app.get('/courses', (req, res) => {
@@ -58,6 +58,11 @@ app.put('/courses/:id', (req, res) => {
         return
     }
     foundCourse.title = req.body.title
+    res.sendStatus(204)
+})
+
+app.delete('/__test__/data/', (req, res) => {
+    db.courses = []
     res.sendStatus(204)
 })
 
