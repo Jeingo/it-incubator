@@ -1,9 +1,11 @@
-Array.prototype.myMap = function(callback) {
+Array.prototype.myFilter = function (callback) {
     const newArray = [];
     // Only change code below this line
-    this.forEach((element, index, originalArr) =>
-        newArray.push(callback(element, index, originalArr))
-    );
+    for (let i = 0; i < this.length; i++) {
+        if (callback(this[i], i, this) == true) {
+            newArray.push(this[i]);
+        }
+    }
     // Only change code above this line
     return newArray;
 };
